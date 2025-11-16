@@ -1,12 +1,4 @@
-# 这是一个示例 Python 脚本。
-
-# 按 Shift+F10 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
-
-
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 Ctrl+F8 切换断点。from docx import Document
+from docx import Document
 from PIL import Image, ImageDraw, ImageFont
 
 # ===== 基本参数配置 =====
@@ -34,7 +26,6 @@ def read_docx_text(path):
         if text:
             paragraphs.append(text)
     return paragraphs
-
 
 def layout_to_grid(paragraphs, cols=23):
     """
@@ -96,6 +87,8 @@ def layout_to_grid(paragraphs, cols=23):
     return padded_lines
 
 
+from PIL import Image, ImageDraw, ImageFont
+
 def draw_grid_image(lines, cols=23, cell_size=40, margin=40,
                     font_path=FONT_PATH, font_size=24, out_path="output.png"):
     """
@@ -150,6 +143,7 @@ def draw_grid_image(lines, cols=23, cell_size=40, margin=40,
     img.save(out_path)
     print(f"已保存图片到: {out_path}")
 
+
 def main():
     # 1. 读取 Word 文本
     paragraphs = read_docx_text(DOCX_PATH)
@@ -158,6 +152,7 @@ def main():
     lines = layout_to_grid(
         paragraphs,
         cols=COLS_PER_LINE,
+        indent_2cells_each_para=True  # 如果只想首段空两格，可以在这里自己改逻辑
     )
 
     # 3. 画图输出
@@ -174,11 +169,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-# 按装订区域中的绿色按钮以运行脚本。
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
